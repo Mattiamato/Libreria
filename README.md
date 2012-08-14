@@ -1,5 +1,7 @@
 Libreria
 ========
+Base del programma:
+http://docs.oracle.com/javase/tutorial/networking/sockets/clientServer.html
 
 
 Programma java che simula una libreria remota.
