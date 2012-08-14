@@ -1,0 +1,31 @@
+
+import java.net.*;
+import java.io.*;
+
+public class multiServer {
+    public static void main(String[] args) throws IOException {
+        ServerSocket serverSocket = null;
+        boolean listening = true;
+
+        try {
+            serverSocket = new ServerSocket(4444);
+            System.out.println("Listening on port: " + serverSocket.getLocalPort());
+        } catch (IOException e) {
+            System.err.println("Could not listen on port: 4444.");
+            System.exit(-1);
+        }
+
+        Socket clientSocket = null;
+        while (listening)
+        {
+        	clientSocket = serverSocket.accept();
+        	new multiServerThread(clientSocket).start();
+        	System.out.println("--------------------------------------");
+        	System.err.println("Client: " + clientSocket.getInetAddress() +" connected.");
+        	System.out.println("--------------------------------------");
+        	clientSocket = null;
+        }
+        
+        serverSocket.close();
+    }
+}
